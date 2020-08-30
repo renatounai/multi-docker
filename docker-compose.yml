@@ -6,7 +6,7 @@ services:
             - POSTGRES_PASSWORD=123456      
     redis:
         image: 'redis:latest'
-    server:
+    api:
         build:
             dockerfile: Dockerfile.dev
             context: server
@@ -35,3 +35,10 @@ services:
         volumes: 
             - /app/node_modules
             - ./worker:/app
+    nginx:
+        restart: always
+        build: 
+            dockerfile: Dockerfile.dev
+            context: ./nginx
+        ports: 
+            - '3050:80'
