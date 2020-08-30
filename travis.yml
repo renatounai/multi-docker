@@ -1,0 +1,23 @@
+sudo: required
+services:
+    - docker
+
+before_install:
+    - docker build -t renatounai/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+    - docker run -e CI=true renatounai/react-test npm test
+
+after_success:
+    - docker build -t renatounai/multi-client ./client
+    - docker build -t renatounai/multi-nginx ./nginx
+    - docker build -t renatounai/multi-server ./server
+    - docker build -t renatounai/multi-worker ./worker
+
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+    - docker push renatounai/multi-client
+    - docker push renatounai/multi-nginx
+    - docker push renatounai/multi-server
+    - docker push renatounai/multi-worker
+    
