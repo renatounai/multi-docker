@@ -20,4 +20,23 @@ after_success:
     - docker push renatounai/multi-nginx
     - docker push renatounai/multi-server
     - docker push renatounai/multi-worker
+
+deploy:
+    provider: elasticbeanstalk
+    region: sa-east-1
+    app: multi-docker   
+    env: MultiDocker-env-1 
+    bucket_name: elasticbeanstalk-sa-east-1-597396919252
+    bucket_path: docker-multi
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+
+    ##access_key_id: $AWS_ACCESS_KEY
+    ##secret_access_key: $AWS_SECRET_KEY
+
+    #deploy:
+    #   edge: true
+    #   provider: elasticbeanstalk
     
