@@ -3,14 +3,14 @@
   "containerDefinitions": [
     {
       "name": "client",
-      "image": "renatounai/multi-client",
+      "image": "stephengrider/multi-client",
       "hostname": "client",
       "essential": false,
       "memory": 128
     },
     {
       "name": "server",
-      "image": "renatounai/multi-server",
+      "image": "stephengrider/multi-server",
       "hostname": "api",
       "essential": false,
       "memory": 128
@@ -24,7 +24,7 @@
     },
     {
       "name": "nginx",
-      "image": "renatounai/multi-nginx",
+      "image": "stephengrider/multi-nginx",
       "hostname": "nginx",
       "essential": true,
       "portMappings": [
